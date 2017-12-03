@@ -25,6 +25,7 @@ var Role = (function(_super){
         //0普通，1子弹，2炸药，3补给品
         this.heroType = _heroType;
 
+
         //射击类型
         this.shootType = 0;
         //射击间隔
@@ -157,14 +158,15 @@ var Role = (function(_super){
         }
         this.x = this.x + this.bulletSpeed.x * timeBetween;
         this.y = this.y + this.bulletSpeed.y * timeBetween;
-        console.log(this.x);
-        console.log(this.y);
+        
     }
 
 
     _proto.doCollision = function(roleBox){
+        console.log(roleBox);
         for(var j = roleBox.length-1; j>-1 ; j--){
             var role2 = this.roleBox.getChildAt(j);
+            
             if(role2.hp>0 && this.camp != role2.camp){
                 var hitRadius = this.hitRadius = role2.hitRadius;
                 if(Math.abs(this.x-role2.x) < hitRadius && Math.abs(this.y-role2.y) < hitRadius){
@@ -230,10 +232,10 @@ var Role = (function(_super){
 
     _proto.bulletFrame = function(roleBox,timeBetween){
         this.bulletFly(timeBetween);
-        /*this.doCollision(roleBox);     
+        this.doCollision(roleBox);     
         if (this.collisionTime <= 0){
-            this.bulletDelet(roleBox);
-        }*/
+            this.bulletDelete(roleBox);
+        }
     }
 
 

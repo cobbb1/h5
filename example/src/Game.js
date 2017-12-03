@@ -59,8 +59,9 @@
             var role = this.roleBox.getChildAt(i);
             if(role && role.speed){
                 //根据飞机速度更改飞机位置
-                if (role.isBullet==false) 
-                    role.y+=role.speed;
+                if (role.isBullet==false && role.heroType!=1) 
+                    role.y += role.speed;
+                    
                 //如果敌机移动到显示区域以外则移除
                 if(role.y>1000 || !role.visible || (role.isBullet && role.y<-20)){
                     //从舞台移除
@@ -87,7 +88,7 @@
                         var bullet = Laya.Pool.getItemByClass("role",Role);
                         //初始化子弹信息
                         bullet.init("bullet1",role.camp,1,-4-role.shootType - Math.floor(this.level / 15),1,1);
-                        bullet.bulletEnter(0,0,0,{x:0,y:-1},{x:0,y:0},0,0,0,1,1,2,0,0,2,30,1,1);
+                        bullet.bulletEnter(0,0,0,{x:0,y:0},{x:0,y:-1},0,0,0,1,1,2,0,0,2,30,1,1);
                         // //设置角色类型为子弹类型
                         bullet.isBullet = true;
                         //设置子弹发射初始化位置
@@ -108,7 +109,7 @@
             //如果角色死亡则忽略
             if(role1.hp<1)continue;
             if (role1.isBullet){
-                role1.bulletFrame(1,this.roleBox);
+                role1.bulletFrame(this.roleBox,1);
                 continue;
             }
             for(var j = i-1;j>-1;j--){
